@@ -10,14 +10,15 @@ namespace StackOverflow
 {
     class StackAPI
     {
-        private string authUrl = "http://stackauth.com/1.0";
-        private string flairUrl = "http://stackexchange.com/users/flair";
-        private string apiKey = "X_ZnExTP50ebPk2OntQxjQ";
-
-        private SortedDictionary<string, Site> sites;
+        private const string authUrl = "http://stackauth.com/1.0";
+        private const string flairUrl = "http://stackexchange.com/users/flair";
+        private const string apiKey = "X_ZnExTP50ebPk2OntQxjQ";
+        
+        private Uri combinedReputationUrl;
         private SortedDictionary<string, User> users;
-
-        public Uri CombinedReputationUrl { get; set; }
+        private SortedDictionary<string, Site> sites;
+        
+        public Uri CombinedReputationUrl { get { return combinedReputationUrl; } }
 
         public SortedDictionary<string, User> Users
         {
@@ -70,7 +71,7 @@ namespace StackOverflow
             {
                 JObject json = JObject.Parse(GetJsonString(url));
                 string associatedId = (string) json["users"][0]["association_id"];
-                CombinedReputationUrl = new System.Uri(string.Format("{0}/{1}.png", flairUrl, associatedId.Replace("-", "")));
+                combinedReputationUrl = new Uri(string.Format("{0}/{1}.png", flairUrl, associatedId.Replace("-", "")));
                 return GetAssociatedSites(associatedId);
             }
             catch
