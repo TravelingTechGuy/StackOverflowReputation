@@ -12,6 +12,8 @@ namespace StackOverflow
     {
         private string authUrl = "http://stackauth.com/1.0";
         private string flairUrl = "http://stackexchange.com/users/flair";
+        private string apiKey = "X_ZnExTP50ebPk2OntQxjQ";
+
         private SortedDictionary<string, Site> sites;
         private SortedDictionary<string, User> users;
 
@@ -103,6 +105,10 @@ namespace StackOverflow
         {
             try
             {
+                if (apiKey != string.Empty)
+                {
+                    url += "?key" + apiKey;
+                }
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
