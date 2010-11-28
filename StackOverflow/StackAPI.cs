@@ -105,10 +105,7 @@ namespace StackOverflow
         {
             try
             {
-                if (apiKey != string.Empty)
-                {
-                    url += "?key" + apiKey;
-                }
+                url += (apiKey != string.Empty) ? "?key=" + apiKey : "";
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
