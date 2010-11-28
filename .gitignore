@@ -1,0 +1,7 @@
+
+Bin
+Debug
+*.exe
+*.pdb
+obj
+*.sou
