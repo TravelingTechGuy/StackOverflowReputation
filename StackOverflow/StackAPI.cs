@@ -33,8 +33,8 @@ namespace StackOverflow
         public StackAPI()
         {
             sites = new SortedDictionary<string, Site>();
-            GetSites();
             users = new SortedDictionary<string, User>();
+            GetSites();
         }
 
         private void GetSites()
@@ -93,7 +93,6 @@ namespace StackOverflow
                     user.FlairUrl = new Uri(string.Format("{0}/users/flair/{1}.png", (string) result["on_site"]["site_url"], user.UserID));
                     users.Add((string) result["on_site"]["name"], user);
                 }
-                
                 return true;
             }
             catch
